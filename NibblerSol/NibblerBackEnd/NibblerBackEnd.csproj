@@ -46,6 +46,7 @@
     <Compile Include="Caterpillar.cs" />
     <Compile Include="CaterpillarGrower.cs" />
     <Compile Include="CaterpillarShrinker.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="ICollidable.cs" />
