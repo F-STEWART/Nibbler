@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace NibblerBackEnd
 {
-    class Wall
+    class Wall : ICollidable
     {
+        public int points { get; set; }
+        public int NumLivesGained { get; set; }
+        public int NumNewTokens { get; set; }
+
+        public event EventHandler Collision;
+
+        public void Collide(Caterpillar c)
+        {
+
+        }
     }
 }
