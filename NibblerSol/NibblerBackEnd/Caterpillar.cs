@@ -16,7 +16,7 @@ namespace NibblerBackEnd
 
         public void Die()
         {
-            
+            // Death to the Caterpillar
         }
     }
 }
