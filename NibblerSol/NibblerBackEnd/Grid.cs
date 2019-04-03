@@ -9,13 +9,13 @@ namespace NibblerBackEnd
     class Grid
     {
 
-        public ICollidable[] tiles { get; private set; }
+        public ICollidable[,] tiles { get; private set; }
 
         public int Length { get; private set; }
 
         public int Width { get; private set; }
 
-        public Grid(ICollidable[] tiles)
+        public Grid(ICollidable[,] tiles)
         {
             this.tiles = tiles;
         }
