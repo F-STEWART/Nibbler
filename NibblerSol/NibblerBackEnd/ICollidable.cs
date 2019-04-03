@@ -12,7 +12,7 @@ namespace NibblerBackEnd
         int NumLivesGained { get; set; }
         int NumNewTokens { get; set; }
 
-        event EventHandler Collision;
+        event CollisionHandler Collision;
 
         void Collide(Caterpillar c);
     }

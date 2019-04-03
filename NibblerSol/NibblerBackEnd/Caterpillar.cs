@@ -12,7 +12,8 @@ namespace NibblerBackEnd
         public Direction Direction;
         public Grid Grid;
         public IEnumerable<Point> Points;
-        public event EventHandler SelfCollision;
+        public event DeathHandler SelfCollision;
+        public delegate void DeathHandler();
 
         public void Die()
         {
@@ -21,7 +22,33 @@ namespace NibblerBackEnd
 
         public void ChangeDirection(Direction d)
         {
-            this.Direction = d;
+            switch (Direction)
+            {
+                case Direction.UP:
+                    if (!(d==Direction.DOWN))
+                    {
+                        this.Direction = d;
+                    }
+                    break;
+                case Direction.DOWN:
+                    if (!(d == Direction.UP))
+                    {
+                        this.Direction = d;
+                    }
+                    break;
+                case Direction.LEFT:
+                    if (!(d == Direction.RIGHT))
+                    {
+                        this.Direction = d;
+                    }
+                    break;
+                case Direction.RIGHT:
+                    if (!(d == Direction.LEFT))
+                    {
+                        this.Direction = d;
+                    }
+                    break;
+            }
         }
 
         public void Update()

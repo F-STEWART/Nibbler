@@ -12,7 +12,14 @@ namespace NibblerBackEnd
         public int NumLivesGained { get; set; }
         public int NumNewTokens { get; set; }
 
-        public event EventHandler Collision;
+        public event CollisionHandler Collision;
+
+        public CaterpillarShrinker(int Points, int NumLivesGained)
+        {
+            this.Points = Points;
+            this.NumLivesGained = NumLivesGained;
+            this.NumNewTokens = NumNewTokens;
+        }
 
         public void Collide(Caterpillar c)
         {
