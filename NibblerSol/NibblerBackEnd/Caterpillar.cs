@@ -18,5 +18,41 @@ namespace NibblerBackEnd
         {
             // Death to the Caterpillar
         }
+
+        public void ChangeDirection(Direction d)
+        {
+            this.Direction = d;
+        }
+
+        public void Update()
+        {
+            Point newest = Squares.Last();
+            switch (Direction)
+            {
+                case Direction.UP:
+                    Squares.Enqueue(new Point(newest.X,newest.Y + 1));
+                    break;
+                case Direction.DOWN:
+                    Squares.Enqueue(new Point(newest.X, newest.Y - 1));
+                    break;
+                case Direction.LEFT:
+                    Squares.Enqueue(new Point(newest.X - 1, newest.Y));
+                    break;
+                case Direction.RIGHT:
+                    Squares.Enqueue(new Point(newest.X + 1, newest.Y));
+                    break;
+            }
+            Squares.Dequeue();
+        }
+
+        public void Shrink()
+        {
+            Squares.Dequeue();
+        }
+
+        public void Grow()
+        {
+
+        }
     }
 }

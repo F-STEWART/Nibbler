@@ -8,7 +8,7 @@ namespace NibblerBackEnd
 {
     interface ICollidable
     {
-        int points { get; set; }
+        int Points { get; set; }
         int NumLivesGained { get; set; }
         int NumNewTokens { get; set; }
 
