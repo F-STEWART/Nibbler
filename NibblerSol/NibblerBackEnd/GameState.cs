@@ -10,17 +10,17 @@ namespace NibblerBackEnd
 {
     class GameState
     {
-        public Grid grid
+        public Grid Grid
         {
             get;
             private set;
         }
-        public Caterpillar caterpillar
+        public Caterpillar Caterpillar
         {
             get;
             private set;
         }
-        public ScoreAndLives scoreAndLives
+        public ScoreAndLives ScoreAndLives
         {
             get;
             private set;
@@ -33,6 +33,10 @@ namespace NibblerBackEnd
         public GameState()
         {
 
+
+
+
+            Subscribing(this.Grid, this.SaveAndLoad);
         }
         private static bool IsRectangular(List<String> ImputStrings)
         {
@@ -103,7 +107,19 @@ namespace NibblerBackEnd
                 throw new ArgumentException("The contents of the file do not have as surrounding wall");
             }
             Grid grid = new Grid(ProtoGrid);
+            
             return grid;
+        }
+        private void Subscribing(Grid Grid, ScoreAndLives ScoreAndLives)
+        {
+            for(int i = 0; i < Grid.tiles.GetLength(0); i++)
+            {
+                for(int j = 0; j < Grid.tiles.GetLength(1); j++)
+                {
+                    Grid.tiles[i,j].Collision += Grid.AddNewTokens;
+                    Grid.tiles[i, j].Collision += ScoreAndLives.CheckScoreAndLives;
+                }
+            }
         }
     }
 }

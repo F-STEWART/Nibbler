@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace NibblerBackEnd
 {
-    public delegate void CollisionHandler();
+    public delegate void CollisionHandler(ICollidable sender, EventArgs e);
 }

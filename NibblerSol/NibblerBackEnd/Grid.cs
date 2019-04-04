@@ -18,6 +18,19 @@ namespace NibblerBackEnd
         public Grid(ICollidable[,] tiles)
         {
             this.tiles = tiles;
+
+
+
+
+
+            
+        }
+        public void AddCollisionEvent(ICollidable subject)
+        {
+            if (subject != null)
+            {
+                subject.Collision += AddNewTokens;
+            }
         }
 
         public void AddNewTokens(ICollidable sender, EventArgs e)
