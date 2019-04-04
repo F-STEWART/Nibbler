@@ -8,5 +8,16 @@ namespace NibblerBackEnd
 {
     class ScoreAndLives
     {
+        public int Score
+        {
+            get;
+            private set;
+        }
+
+
+        public void CheckScoreAndLives(ICollidable Sender, EventArgs e)
+        {
+
+        }
     }
 }

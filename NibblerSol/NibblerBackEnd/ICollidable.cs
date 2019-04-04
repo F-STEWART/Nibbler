@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NibblerBackEnd
 {
-    interface ICollidable
+    public interface ICollidable
     {
         int Points { get; set; }
         int NumLivesGained { get; set; }
