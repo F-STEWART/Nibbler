@@ -10,7 +10,31 @@ namespace NibblerBackEnd
 {
     class GameState
     {
-        private bool IsRectangular(List<String> ImputStrings)
+        public Grid grid
+        {
+            get;
+            private set;
+        }
+        public Caterpillar caterpillar
+        {
+            get;
+            private set;
+        }
+        public ScoreAndLives scoreAndLives
+        {
+            get;
+            private set;
+        }
+        public bool ShouldContinue
+        {
+            get;
+            private set;
+        }
+        public GameState()
+        {
+
+        }
+        private static bool IsRectangular(List<String> ImputStrings)
         {
             bool IsRectangular = true;
             int Xlength = ImputStrings[3].Length;
@@ -23,7 +47,7 @@ namespace NibblerBackEnd
             }
             return IsRectangular;
         }
-        private bool HasWalls(ICollidable[,] ProtoGrid)
+        private static bool HasWalls(ICollidable[,] ProtoGrid)
         {
             bool HasWalls = true;
             for(int i = 0; i < ProtoGrid.GetLength(0); i++)
@@ -42,7 +66,7 @@ namespace NibblerBackEnd
             }
             return HasWalls;
         }
-        private Grid Load(String FileName)
+        private static Grid Load(String FileName)
         {
             List<String> Contents = new List<String>();
             using (StreamReader sr = File.OpenText(FileName)) 
