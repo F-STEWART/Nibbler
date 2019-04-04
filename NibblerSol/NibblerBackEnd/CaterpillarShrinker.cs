@@ -18,7 +18,7 @@ namespace NibblerBackEnd
         {
             this.Points = Points;
             this.NumLivesGained = NumLivesGained;
-            this.NumNewTokens = NumNewTokens;
+            this.NumNewTokens = 1;
         }
 
         public void Collide(Caterpillar c)
