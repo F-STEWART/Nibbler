@@ -15,10 +15,12 @@ namespace NibblerBackEnd
 
         public int Width { get; private set; }
 
-        public Grid(ICollidable[,] tiles)
+        private ScoreAndLives ScoreAndLives;
+
+        public Grid(ICollidable[,] tiles, ScoreAndLives ScoreAndLives)
         {
             this.tiles = tiles;
-
+            this.ScoreAndLives = ScoreAndLives;
 
 
 
@@ -33,9 +35,14 @@ namespace NibblerBackEnd
             }
         }
 
-        public void AddNewTokens(ICollidable sender, EventArgs e)
+        private void AddNewTokens(ICollidable sender, EventArgs e)
         {
+            ICollidable NewToken = new Wall();
 
+
+
+            this.AddCollisionEvent(NewToken);
+            ScoreAndLives.AddCollisionEvent(NewToken);
         }
     }
 }
