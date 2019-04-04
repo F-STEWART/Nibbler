@@ -20,6 +20,18 @@ namespace NibblerBackEnd
             // Death to the Caterpillar
         }
 
+        public void WhenSelfCollision()
+        {
+            OnWhenSelfCollision();
+        }
+        public void OnWhenSelfCollision()
+        {
+            if(SelfCollision != null)
+            {
+                SelfCollision();
+            }
+        }
+
         public void ChangeDirection(Direction d)
         {
             switch (Direction)
