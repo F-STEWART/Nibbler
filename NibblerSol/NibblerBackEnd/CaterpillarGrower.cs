@@ -23,7 +23,18 @@ namespace NibblerBackEnd
 
         public void Collide(Caterpillar c)
         {
-            
+
+
+
+            OnCollide();
+        }
+
+        protected virtual void OnCollide()
+        {
+            if (Collision != null)
+            {
+                Collision(this, null);
+            }
         }
     }
 }
