@@ -106,7 +106,7 @@ namespace NibblerBackEnd
             {
                 throw new ArgumentException("The contents of the file do not have as surrounding wall");
             }
-            Grid grid = new Grid(ProtoGrid);
+            Grid grid = new Grid(ProtoGrid, ScoreAndLives);
             
             return grid;
         }
@@ -116,10 +116,31 @@ namespace NibblerBackEnd
             {
                 for(int j = 0; j < Grid.tiles.GetLength(1); j++)
                 {
-                    Grid.tiles[i,j].Collision += Grid.AddNewTokens;
-                    Grid.tiles[i, j].Collision += ScoreAndLives.CheckScoreAndLives;
+                    
+                    Grid.AddCollisionEvent(Grid.tiles[i, j]);
+                    ScoreAndLives.AddCollisionEvent(Grid.tiles[i, j]);
+
+
                 }
             }
+            AddSelfCollisionSub();
+            ScoreAndLives.SelfCollisionSub(Caterpillar);
+        }
+        private void DeathSubscription()
+        {
+            ScoreAndLives.NoMoreLives += SetPause;
+        }
+        private void SetPause()
+        {
+
+        }
+        private void AddSelfCollisionSub()
+        {
+            this.Caterpillar.SelfCollision += Reset;
+        }
+        private void Reset()
+        {
+
         }
     }
 }
