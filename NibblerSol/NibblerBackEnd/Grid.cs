@@ -23,10 +23,9 @@ namespace NibblerBackEnd
 
         private Caterpillar Caterpillar;
 
-        public Grid(ICollidable[,] tiles, ScoreAndLives ScoreAndLives, RandomToken TokenGenerator)
+        public Grid(ICollidable[,] tiles, RandomToken TokenGenerator)
         {
             this.tiles = tiles;
-            this.ScoreAndLives = ScoreAndLives;
             this.TokenGenerator = TokenGenerator;
             this.Caterpillar = null;
 
@@ -34,6 +33,10 @@ namespace NibblerBackEnd
 
 
             
+        }
+        public void AquireScoreAndLives(ScoreAndLives ScoreAndLives)
+        {
+
         }
         public void AquireCaterpillar(Caterpillar Caterpillar)
         {
