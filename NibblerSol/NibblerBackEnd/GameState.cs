@@ -32,11 +32,39 @@ namespace NibblerBackEnd
         }
         public GameState()
         {
-
-
+            this.Grid = Load("");
+            int MiddleX = this.Grid.tiles.GetLength(0) / 2;
+            int MiddleY = this.Grid.tiles.GetLength(1) / 2;
+            this.Caterpillar = new Caterpillar(new Point(MiddleX, MiddleY), this.Grid);
+            this.Grid.AquireCaterpillar(this.Caterpillar);
+            RandomToken(this.Grid, this.Caterpillar);
 
 
             Subscribing(this.Grid, this.SaveAndLoad);
+        }
+        public static ICollidable RandomToken(Grid Grid, Caterpillar Caterpillar)
+        {
+            ICollidable Result;
+            Random rand = new Random();
+            if(rand.NextDouble() * (double)100 < 90)
+            {
+                Result = new CaterpillarGrower(3, 0);
+            }
+            else
+            {
+                Result = new CaterpillarShrinker(1, 0);
+            }
+            bool PositionIsNotNull = true;
+            do
+            {
+                int RandomX = (int)(rand.NextDouble() * (double)Grid.tiles.GetLength(0));
+                int RandomY = (int)(rand.NextDouble() * (double)Grid.tiles.GetLength(1));
+                if (!Caterpillar.Contains(new Point(RandomX, RandomY)) && (Grid.tiles[RandomX, RandomY] == null))
+                {
+                    Grid.tiles[RandomX, RandomY] = Result;
+                }
+            } while (PositionIsNotNull);
+            return Result;
         }
         private static bool IsRectangular(List<String> ImputStrings)
         {
@@ -106,7 +134,7 @@ namespace NibblerBackEnd
             {
                 throw new ArgumentException("The contents of the file do not have as surrounding wall");
             }
-            Grid grid = new Grid(ProtoGrid, ScoreAndLives);
+            Grid grid = new Grid(ProtoGrid, ScoreAndLives, RandomToken);
             
             return grid;
         }
@@ -141,6 +169,15 @@ namespace NibblerBackEnd
         private void Reset()
         {
 
+        }
+        public void Update()
+        {
+            this.Caterpillar.Update();
+            Point Current = this.Caterpillar.GetHead();
+            if(Grid.tiles[Current.X, Current.Y] != null)
+            {
+                Grid.Collide(this.Caterpillar);
+            }
         }
     }
 }
