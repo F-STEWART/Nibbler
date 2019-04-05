@@ -11,14 +11,9 @@ namespace NibblerBackEnd
         private Queue<Point> Squares;
         public Direction Direction;
         public Grid Grid;
-        public IEnumerable<Point> Points;
         public event DeathHandler SelfCollision;
         public delegate void DeathHandler();
-
-        public void Die()
-        {
-            // Death to the Caterpillar
-        }
+        int Grower;
 
         public void WhenSelfCollision()
         {
@@ -30,6 +25,15 @@ namespace NibblerBackEnd
             {
                 SelfCollision();
             }
+        }
+
+        public Caterpillar(Point start, Grid Grid)
+        {
+            this.Grid = Grid;
+            this.Squares = new Queue<Point>();
+            Squares.Enqueue(start);
+            this.Direction = Direction.RIGHT;
+            this.Grower = 0;
         }
 
         public void ChangeDirection(Direction d)
@@ -65,23 +69,35 @@ namespace NibblerBackEnd
 
         public void Update()
         {
+            Move();
+        }
+
+        public void Move()
+        {
             Point newest = Squares.Last();
             switch (Direction)
             {
                 case Direction.UP:
-                    Squares.Enqueue(new Point(newest.X,newest.Y + 1));
+                    grow(new Point(newest.X, newest.Y + 1));
                     break;
                 case Direction.DOWN:
-                    Squares.Enqueue(new Point(newest.X, newest.Y - 1));
+                    grow(new Point(newest.X, newest.Y - 1));
                     break;
                 case Direction.LEFT:
-                    Squares.Enqueue(new Point(newest.X - 1, newest.Y));
+                    grow(new Point(newest.X - 1, newest.Y));
                     break;
                 case Direction.RIGHT:
-                    Squares.Enqueue(new Point(newest.X + 1, newest.Y));
+                    grow(new Point(newest.X + 1, newest.Y));
                     break;
             }
-            Squares.Dequeue();
+            if (this.Grower <= 0)
+            {
+                Shrink();
+            }
+            else
+            {
+                this.Grower--;
+            }
         }
 
         public void Shrink()
@@ -89,9 +105,24 @@ namespace NibblerBackEnd
             Squares.Dequeue();
         }
 
-        public void Grow()
+        private void grow(Point next)
         {
+            Squares.Enqueue(next);
+        }
 
+        public void Grow(int change)
+        {
+            this.Grower += change;
+        }
+
+        public Boolean Contains(Point contents)
+        {
+            foreach (Point square in Squares)
+            {
+                if (square == contents)
+                    return true;
+            }
+            return false;
         }
     }
 }

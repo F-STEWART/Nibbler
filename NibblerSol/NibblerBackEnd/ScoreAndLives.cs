@@ -13,6 +13,11 @@ namespace NibblerBackEnd
             get;
             private set;
         }
+        public int Lives
+        {
+            get;
+            private set;
+        }
         public event NoLivesHandler NoMoreLives;
         public delegate void NoLivesHandler();
 
@@ -29,7 +34,14 @@ namespace NibblerBackEnd
         }
         public void AddPointsAndLives(ICollidable Sender, EventArgs e)
         {
-
+            if (Sender is CaterpillarGrower || Sender is CaterpillarShrinker)
+            {
+                this.Score += Sender.Points;
+            }
+            else if (Sender is Wall)
+            {
+                this.Lives--;
+            }
         }
         public void AddCollisionEvent(ICollidable Sender)
         {
