@@ -38,9 +38,11 @@ namespace NibblerBackEnd
             this.Caterpillar = new Caterpillar(new Point(MiddleX, MiddleY), this.Grid);
             this.Grid.AquireCaterpillar(this.Caterpillar);
             RandomToken(this.Grid, this.Caterpillar);
+            this.ScoreAndLives = new ScoreAndLives();
+            this.Grid.AquireScoreAndLives(this.ScoreAndLives);
 
 
-            Subscribing(this.Grid, this.SaveAndLoad);
+            Subscribing(this.Grid, this.ScoreAndLives);
         }
         public static ICollidable RandomToken(Grid Grid, Caterpillar Caterpillar)
         {
@@ -134,7 +136,7 @@ namespace NibblerBackEnd
             {
                 throw new ArgumentException("The contents of the file do not have as surrounding wall");
             }
-            Grid grid = new Grid(ProtoGrid, ScoreAndLives, RandomToken);
+            Grid grid = new Grid(ProtoGrid, RandomToken);
             
             return grid;
         }
