@@ -17,5 +17,21 @@ namespace NibblerBackEnd
             this.X = X;
             this.Y = Y;
         }
+
+        public static Boolean operator ==(Point a, Point b)
+        {
+            if (a.X == b.X && a.Y == b.Y)
+                return true;
+            else
+                return false;
+        }
+
+        public static Boolean operator !=(Point a, Point b)
+        {
+            if (a.X == b.X && a.Y == b.Y)
+                return false;
+            else
+                return true;
+        }
     }
 }
