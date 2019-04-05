@@ -17,15 +17,27 @@ namespace NibblerBackEnd
 
         private ScoreAndLives ScoreAndLives;
 
-        public Grid(ICollidable[,] tiles, ScoreAndLives ScoreAndLives)
+        public delegate ICollidable RandomToken(Grid Grid, Caterpillar Caterpillar);
+
+        private RandomToken TokenGenerator;
+
+        private Caterpillar Caterpillar;
+
+        public Grid(ICollidable[,] tiles, ScoreAndLives ScoreAndLives, RandomToken TokenGenerator)
         {
             this.tiles = tiles;
             this.ScoreAndLives = ScoreAndLives;
+            this.TokenGenerator = TokenGenerator;
+            this.Caterpillar = null;
 
 
 
 
             
+        }
+        public void AquireCaterpillar(Caterpillar Caterpillar)
+        {
+            this.Caterpillar = Caterpillar;
         }
         public void AddCollisionEvent(ICollidable subject)
         {
@@ -38,11 +50,16 @@ namespace NibblerBackEnd
         private void AddNewTokens(ICollidable sender, EventArgs e)
         {
             ICollidable NewToken = new Wall();
-
+            TokenGenerator(this, Caterpillar);
 
 
             this.AddCollisionEvent(NewToken);
             ScoreAndLives.AddCollisionEvent(NewToken);
+        }
+        public void Collide(Caterpillar Caterpillar)
+        {
+            Point Current = Caterpillar.GetHead();
+            this.tiles[Current.X, Current.Y].Collide(Caterpillar);
         }
     }
 }
