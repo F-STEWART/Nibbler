@@ -23,7 +23,7 @@ namespace NibblerBackEnd
 
         public void Collide(Caterpillar c)
         {
-            c.Grow();
+            c.Grow(1);
             OnCollide();
         }
 

@@ -15,6 +15,13 @@ namespace NibblerBackEnd
         public delegate void DeathHandler();
         int Grower;
 
+        public void Die()
+        {
+            this.Squares = new Queue<Point>();
+            Squares.Enqueue(new Point(Grid.tiles.GetLength(0/2), Grid.tiles.GetLength(1)/2));
+            this.Grower = 0;
+        }
+
         public void WhenSelfCollision()
         {
             OnWhenSelfCollision();
@@ -70,6 +77,11 @@ namespace NibblerBackEnd
         public void Update()
         {
             Move();
+        }
+
+        public Point GetHead()
+        {
+            return Squares.Last();
         }
 
         public void Move()
