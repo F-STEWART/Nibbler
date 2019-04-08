@@ -36,7 +36,7 @@ namespace NibblerBackEnd
         }
         public void AquireScoreAndLives(ScoreAndLives ScoreAndLives)
         {
-
+            this.ScoreAndLives = ScoreAndLives;
         }
         public void AquireCaterpillar(Caterpillar Caterpillar)
         {
