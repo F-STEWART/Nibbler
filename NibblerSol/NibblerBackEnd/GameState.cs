@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace NibblerBackEnd
 {
-    class GameState
+    public class GameState
     {
         public Grid Grid
         {
@@ -32,7 +32,7 @@ namespace NibblerBackEnd
         }
         public GameState()
         {
-            this.Grid = Load("");
+            this.Grid = Load("sampleGrid.txt");
             int MiddleX = this.Grid.tiles.GetLength(0) / 2;
             int MiddleY = this.Grid.tiles.GetLength(1) / 2;
             this.Caterpillar = new Caterpillar(new Point(MiddleX, MiddleY), this.Grid);
@@ -162,7 +162,7 @@ namespace NibblerBackEnd
         }
         private void SetPause()
         {
-
+            this.ShouldContinue = false;
         }
         private void AddSelfCollisionSub()
         {
@@ -170,15 +170,27 @@ namespace NibblerBackEnd
         }
         private void Reset()
         {
+            this.Grid = Load("sampleGrid.txt");
+            int MiddleX = this.Grid.tiles.GetLength(0) / 2;
+            int MiddleY = this.Grid.tiles.GetLength(1) / 2;
+            this.Caterpillar = new Caterpillar(new Point(MiddleX, MiddleY), this.Grid);
+            this.Grid.AquireCaterpillar(this.Caterpillar);
+            RandomToken(this.Grid, this.Caterpillar);
+            this.Grid.AquireScoreAndLives(this.ScoreAndLives);
 
+
+            Subscribing(this.Grid, this.ScoreAndLives);
         }
         public void Update()
         {
-            this.Caterpillar.Update();
-            Point Current = this.Caterpillar.GetHead();
-            if(Grid.tiles[Current.X, Current.Y] != null)
+            if (this.ShouldContinue)
             {
-                Grid.Collide(this.Caterpillar);
+                this.Caterpillar.Update();
+                Point Current = this.Caterpillar.GetHead();
+                if (Grid.tiles[Current.X, Current.Y] != null)
+                {
+                    Grid.Collide(this.Caterpillar);
+                }
             }
         }
     }

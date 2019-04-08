@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NibblerBackEnd
 {
-    class Point
+    public class Point
     {
         public int X { get; private set; }
 

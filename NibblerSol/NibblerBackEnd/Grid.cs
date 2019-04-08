@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NibblerBackEnd
 {
-    class Grid
+    public class Grid
     {
 
         public ICollidable[,] tiles { get; private set; }
@@ -36,7 +36,7 @@ namespace NibblerBackEnd
         }
         public void AquireScoreAndLives(ScoreAndLives ScoreAndLives)
         {
-
+            this.ScoreAndLives = ScoreAndLives;
         }
         public void AquireCaterpillar(Caterpillar Caterpillar)
         {
