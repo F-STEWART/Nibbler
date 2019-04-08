@@ -116,8 +116,8 @@ namespace NibblerBackEnd
             {
                 throw new ArgumentException("The contents of the file are not Rectangular");
             }
-            int Xlength = Contents[3].Length;
-            int Ylength = Contents.Count - 3;
+            int Ylength = Contents[3].Length;
+            int Xlength = Contents.Count - 3;
             ICollidable[,] ProtoGrid = new ICollidable[Xlength, Ylength];
             for (int i = 0; i < Xlength; i++)
             {
@@ -125,11 +125,11 @@ namespace NibblerBackEnd
                 {
                     if(Contents[i+3][j] == 'W')
                     {
-                        ProtoGrid[i, j] = new Wall();
+                        ProtoGrid[j, i] = new Wall();
                     }
                     else
                     {
-                        ProtoGrid[i, j] = null;
+                        ProtoGrid[j, i] = null;
                     }
                 }
             }
