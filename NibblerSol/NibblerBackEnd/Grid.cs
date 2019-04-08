@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NibblerBackEnd
 {
-    class Grid
+    public class Grid
     {
 
         public ICollidable[,] tiles { get; private set; }

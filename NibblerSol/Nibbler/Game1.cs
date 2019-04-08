@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using NibblerBackEnd;
 
 namespace Nibbler
 {
@@ -11,6 +12,8 @@ namespace Nibbler
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D[,] Grid;
+        GameState GameState;
 
         public Game1()
         {
@@ -29,6 +32,7 @@ namespace Nibbler
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            GameState = new GameState();
         }
 
         /// <summary>
@@ -40,6 +44,30 @@ namespace Nibbler
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            
+            //loads all but snake
+            for (int i=0; i< GameState.Grid.tiles.GetLength(0);i++)
+            {
+                for (int j = 0; j < GameState.Grid.tiles.GetLength(1); j++)
+                {
+                    if (GameState.Grid.tiles[i,j] is null)
+                    {
+                        this.Grid[i, j] = this.Content.Load<Texture2D>("ground");
+                    }
+                    if (GameState.Grid.tiles[i, j] is Wall)
+                    {
+                        this.Grid[i, j] = this.Content.Load<Texture2D>("wall");
+                    }
+                    if (GameState.Grid.tiles[i, j] is CaterpillarGrower)
+                    {
+                        this.Grid[i, j] = this.Content.Load<Texture2D>("grower");
+                    }
+                    if (GameState.Grid.tiles[i, j] is CaterpillarShrinker)
+                    {
+                        this.Grid[i, j] = this.Content.Load<Texture2D>("shrinker");
+                    }
+                }
+            }
             // TODO: use this.Content to load your game content here
         }
 
@@ -76,6 +104,15 @@ namespace Nibbler
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            for (int i = 0; i < GameState.Grid.tiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < GameState.Grid.tiles.GetLength(1); j++)
+                {
+                    spriteBatch.Draw(Grid[i,j], new Vector2(i*32f, j*32f));
+                }
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
