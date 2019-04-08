@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NibblerBackEnd
 {
-    class CaterpillarGrower : ICollidable
+    public class CaterpillarGrower : ICollidable
     {
         public int Points { get; set; }
         public int NumLivesGained { get; set; }

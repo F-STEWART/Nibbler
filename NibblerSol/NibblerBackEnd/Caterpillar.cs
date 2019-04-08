@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NibblerBackEnd
 {
-    class Caterpillar
+    public class Caterpillar
     {
         private Queue<Point> Squares;
         public Direction Direction;

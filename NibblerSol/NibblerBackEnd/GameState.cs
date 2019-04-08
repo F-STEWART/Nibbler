@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace NibblerBackEnd
 {
-    class GameState
+    public class GameState
     {
         public Grid Grid
         {
