@@ -158,6 +158,7 @@ namespace NibblerBackEnd
             }
             AddSelfCollisionSub();
             ScoreAndLives.SelfCollisionSub(Caterpillar);
+            DeathSubscription();
         }
         private void DeathSubscription()
         {
@@ -169,7 +170,7 @@ namespace NibblerBackEnd
         }
         private void AddSelfCollisionSub()
         {
-            this.Caterpillar.SelfCollision += Reset;
+            this.Caterpillar.SelfCollision += this.Caterpillar.Die;
         }
         private void Reset()
         {
