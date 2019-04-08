@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Threading;
 
 namespace NibblerBackEnd
 {
@@ -40,6 +41,7 @@ namespace NibblerBackEnd
             RandomToken(this.Grid, this.Caterpillar);
             this.ScoreAndLives = new ScoreAndLives();
             this.Grid.AquireScoreAndLives(this.ScoreAndLives);
+            this.ShouldContinue = true;
 
 
             Subscribing(this.Grid, this.ScoreAndLives);
@@ -48,7 +50,7 @@ namespace NibblerBackEnd
         {
             ICollidable Result;
             Random rand = new Random();
-            if(rand.NextDouble() * ((double)100) < 90)
+            if(rand.NextDouble() * ((double)100) < 80)
             {
                 Result = new CaterpillarGrower(3, 0);
             }
@@ -87,14 +89,14 @@ namespace NibblerBackEnd
             bool HasWalls = true;
             for(int i = 0; i < ProtoGrid.GetLength(0); i++)
             {
-                if(ProtoGrid[i,0].GetType() != typeof(Wall) || ProtoGrid[i,ProtoGrid.GetLength(1)-1].GetType() != typeof(Wall))
+                if((ProtoGrid[i, 0] == null || ProtoGrid[i,0].GetType() != typeof(Wall)) || (ProtoGrid[i, ProtoGrid.GetLength(1) - 1] == null || ProtoGrid[i,ProtoGrid.GetLength(1)-1].GetType() != typeof(Wall)))
                 {
                     HasWalls = false;
                 }
             }
             for (int i = 0; i < ProtoGrid.GetLength(1); i++)
             {
-                if (ProtoGrid[0, i].GetType() != typeof(Wall) || ProtoGrid[ProtoGrid.GetLength(0)-1, i].GetType() != typeof(Wall))
+                if ((ProtoGrid[0, i] == null || ProtoGrid[0, i].GetType() != typeof(Wall)) || (ProtoGrid[ProtoGrid.GetLength(0) - 1, i] == null || ProtoGrid[ProtoGrid.GetLength(0)-1, i].GetType() != typeof(Wall)))
                 {
                     HasWalls = false;
                 }
@@ -116,20 +118,20 @@ namespace NibblerBackEnd
             {
                 throw new ArgumentException("The contents of the file are not Rectangular");
             }
-            int Ylength = Contents[3].Length;
-            int Xlength = Contents.Count - 3;
+            int Xlength = Contents[3].Length;
+            int Ylength = Contents.Count - 3;
             ICollidable[,] ProtoGrid = new ICollidable[Xlength, Ylength];
             for (int i = 0; i < Xlength; i++)
             {
                 for(int j = 0; j < Ylength; j++)
                 {
-                    if(Contents[i+3][j] == 'W')
+                    if(Contents[j+3][i] == 'W')
                     {
-                        ProtoGrid[j, i] = new Wall();
+                        ProtoGrid[i, j] = new Wall();
                     }
                     else
                     {
-                        ProtoGrid[j, i] = null;
+                        ProtoGrid[i, j] = null;
                     }
                 }
             }
@@ -184,6 +186,7 @@ namespace NibblerBackEnd
         }
         public void Update()
         {
+            
             if (this.ShouldContinue)
             {
                 this.Caterpillar.Update();

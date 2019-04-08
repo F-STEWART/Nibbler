@@ -2,6 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NibblerBackEnd;
+using System;
+using System.Text;
+using System.Threading;
 
 namespace Nibbler
 {
@@ -14,11 +17,14 @@ namespace Nibbler
         SpriteBatch spriteBatch;
         Texture2D[,] Grid;
         GameState GameState;
+        int UpdaterCount = 0;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            this.IsFixedTimeStep = true;
+            this.TargetElapsedTime = TimeSpan.FromSeconds(1d / 300d);
         }
 
         /// <summary>
@@ -32,6 +38,7 @@ namespace Nibbler
             // TODO: Add your initialization logic here
 
             GameState = new GameState();
+            Grid = new Texture2D[GameState.Grid.tiles.GetLength(0), GameState.Grid.tiles.GetLength(1)];
             base.Initialize();
         }
 
@@ -46,26 +53,48 @@ namespace Nibbler
 
             // TODO: use this.Content to load your game content here
 
-            //loads all but snake
-            for (int i=0; i< GameState.Grid.tiles.GetLength(0);i++)
+            GenerateTextures();
+        }
+
+        public void GenerateTextures()
+        {
+            //Generate texture grid
+            for (int i = 0; i < GameState.Grid.tiles.GetLength(0); i++)
             {
                 for (int j = 0; j < GameState.Grid.tiles.GetLength(1); j++)
                 {
-                    if (GameState.Grid.tiles[i,j] is null)
+                    if (GameState.Grid.tiles[i, j] is null)
                     {
                         this.Grid[i, j] = this.Content.Load<Texture2D>("ground");
                     }
-                    if (GameState.Grid.tiles[i, j] is Wall)
+                    else if (GameState.Grid.tiles[i, j] is Wall)
                     {
                         this.Grid[i, j] = this.Content.Load<Texture2D>("wall");
                     }
-                    if (GameState.Grid.tiles[i, j] is CaterpillarGrower)
+                    else if (GameState.Grid.tiles[i, j] is CaterpillarGrower)
                     {
                         this.Grid[i, j] = this.Content.Load<Texture2D>("grower");
                     }
-                    if (GameState.Grid.tiles[i, j] is CaterpillarShrinker)
+                    else if (GameState.Grid.tiles[i, j] is CaterpillarShrinker)
                     {
                         this.Grid[i, j] = this.Content.Load<Texture2D>("shrinker");
+                    }
+                }
+            }
+
+            //Add snake to texture grid
+            for (int i = 0; i < GameState.Grid.tiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < GameState.Grid.tiles.GetLength(1); j++)
+                {
+                    if (GameState.Caterpillar.Contains(new NibblerBackEnd.Point(i, j)))
+                    {
+                        if (GameState.Caterpillar.GetHead() == new NibblerBackEnd.Point(i, j))
+                            this.Grid[i, j] = this.Content.Load<Texture2D>("snake_head");
+                       // else if (GameState.Caterpillar.GetTail() == new NibblerBackEnd.Point(i, j))
+                       //     this.Grid[i, j] = this.Content.Load<Texture2D>("snake_tail");
+                        else
+                            this.Grid[i, j] = this.Content.Load<Texture2D>("snake_body");
                     }
                 }
             }
@@ -90,8 +119,27 @@ namespace Nibbler
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            KeyboardState state = Keyboard.GetState();
 
+            // TODO: Add your update logic here
+            if (state.IsKeyDown(Keys.Right))
+                GameState.Caterpillar.ChangeDirection(Direction.RIGHT);
+            if (state.IsKeyDown(Keys.Left))
+                GameState.Caterpillar.ChangeDirection(Direction.LEFT);
+            if (state.IsKeyDown(Keys.Up))
+                GameState.Caterpillar.ChangeDirection(Direction.UP);
+            if (state.IsKeyDown(Keys.Down))
+                GameState.Caterpillar.ChangeDirection(Direction.DOWN);
+            GenerateTextures();
+            if (UpdaterCount < 60)
+            {
+                UpdaterCount++;
+            }
+            else
+            {
+                GameState.Update();
+                UpdaterCount = 0;
+            }
             base.Update(gameTime);
         }
 
@@ -102,8 +150,11 @@ namespace Nibbler
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
+            graphics.PreferredBackBufferWidth = GameState.Grid.tiles.GetLength(0) * 32;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = GameState.Grid.tiles.GetLength(1) * 32;   // set this value to the desired height of your window
+            graphics.ApplyChanges();
 
-            // TODO: Add your drawing code here
+            // Draws texture grid onto screen
             spriteBatch.Begin();
             for (int i = 0; i < GameState.Grid.tiles.GetLength(0); i++)
             {

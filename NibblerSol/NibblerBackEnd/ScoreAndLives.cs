@@ -20,6 +20,11 @@ namespace NibblerBackEnd
         }
         public event NoLivesHandler NoMoreLives;
         public delegate void NoLivesHandler();
+        public ScoreAndLives()
+        {
+            this.Score = 0;
+            this.Lives = 3;
+        }
 
         public void EndGame()
         {
@@ -42,6 +47,10 @@ namespace NibblerBackEnd
             {
                 this.Lives--;
             }
+            if(this.Lives == 0)
+            {
+                EndGame();
+            }
         }
         public void AddCollisionEvent(ICollidable Sender)
         {
@@ -52,7 +61,7 @@ namespace NibblerBackEnd
         }
         public void LoseALife()
         {
-
+            this.Lives--;
         }
         public void SelfCollisionSub(Caterpillar Caterpillar)
         {

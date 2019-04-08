@@ -15,13 +15,6 @@ namespace NibblerBackEnd
         public delegate void DeathHandler();
         int Grower;
 
-        public void Die()
-        {
-            this.Squares = new Queue<Point>();
-            Squares.Enqueue(new Point(Grid.tiles.GetLength(0/2), Grid.tiles.GetLength(1)/2));
-            this.Grower = 0;
-        }
-
         public void WhenSelfCollision()
         {
             OnWhenSelfCollision();
@@ -34,10 +27,25 @@ namespace NibblerBackEnd
             }
         }
 
+        public void Die()
+        {
+            int MiddleX = this.Grid.tiles.GetLength(0) / 2;
+            int MiddleY = this.Grid.tiles.GetLength(1) / 2;
+            Point start = new Point(MiddleX, MiddleY);
+            Point tail = new Point(start.X - 1, start.Y);
+            this.Squares = new Queue<Point>();
+            Squares.Enqueue(tail);
+            Squares.Enqueue(start);
+            this.Grower = 0;
+            this.Direction = Direction.RIGHT;
+        }
+
         public Caterpillar(Point start, Grid Grid)
         {
+            Point tail = new Point(start.X-1, start.Y);
             this.Grid = Grid;
             this.Squares = new Queue<Point>();
+            Squares.Enqueue(tail);
             Squares.Enqueue(start);
             this.Direction = Direction.RIGHT;
             this.Grower = 0;
@@ -84,16 +92,21 @@ namespace NibblerBackEnd
             return Squares.Last();
         }
 
+        public Point GetTail()
+        {
+            return Squares.First();
+        }
+
         public void Move()
         {
-            Point newest = Squares.Last();
+            Point newest = GetHead();
             switch (Direction)
             {
                 case Direction.UP:
-                    grow(new Point(newest.X, newest.Y + 1));
+                    grow(new Point(newest.X, newest.Y - 1));
                     break;
                 case Direction.DOWN:
-                    grow(new Point(newest.X, newest.Y - 1));
+                    grow(new Point(newest.X, newest.Y + 1));
                     break;
                 case Direction.LEFT:
                     grow(new Point(newest.X - 1, newest.Y));
