@@ -23,7 +23,9 @@ namespace NibblerBackEnd
 
         public void Collide(Caterpillar c)
         {
-            c.Shrink();
+            if (c.GetLength() > 1) {
+                c.Shrink();
+            }
             OnCollide();
         }
 

@@ -85,6 +85,20 @@ namespace NibblerBackEnd
         public void Update()
         {
             Move();
+            int Count = 1;
+            foreach (Point X in Squares)
+            {
+                if(X == GetHead() && Count != GetLength())
+                {
+                    WhenSelfCollision();
+                }
+                Count++;
+            }
+        }
+
+        public int GetLength()
+        {
+            return Squares.Count;
         }
 
         public Point GetHead()

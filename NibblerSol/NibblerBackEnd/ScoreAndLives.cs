@@ -47,7 +47,7 @@ namespace NibblerBackEnd
             {
                 this.Lives--;
             }
-            if(this.Lives == 0)
+            if(this.Lives <= 0)
             {
                 EndGame();
             }
