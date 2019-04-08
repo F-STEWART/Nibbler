@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Threading;
 
 namespace NibblerBackEnd
 {
@@ -40,6 +41,7 @@ namespace NibblerBackEnd
             RandomToken(this.Grid, this.Caterpillar);
             this.ScoreAndLives = new ScoreAndLives();
             this.Grid.AquireScoreAndLives(this.ScoreAndLives);
+            this.ShouldContinue = true;
 
 
             Subscribing(this.Grid, this.ScoreAndLives);
@@ -48,7 +50,7 @@ namespace NibblerBackEnd
         {
             ICollidable Result;
             Random rand = new Random();
-            if(rand.NextDouble() * ((double)100) < 90)
+            if(rand.NextDouble() * ((double)100) < 80)
             {
                 Result = new CaterpillarGrower(3, 0);
             }
@@ -184,6 +186,7 @@ namespace NibblerBackEnd
         }
         public void Update()
         {
+            
             if (this.ShouldContinue)
             {
                 this.Caterpillar.Update();

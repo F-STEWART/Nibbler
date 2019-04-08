@@ -44,7 +44,7 @@ namespace NibblerBackEnd
         }
         public void AddCollisionEvent(ICollidable subject)
         {
-            if (subject != null)
+            if (subject != null && subject.GetType() != typeof(Wall))
             {
                 subject.Collision += AddNewTokens;
             }
@@ -52,12 +52,13 @@ namespace NibblerBackEnd
 
         private void AddNewTokens(ICollidable sender, EventArgs e)
         {
-            ICollidable NewToken = new Wall();
-            TokenGenerator(this, Caterpillar);
+            
+            ICollidable NewToken = TokenGenerator(this, Caterpillar);
 
 
             this.AddCollisionEvent(NewToken);
             ScoreAndLives.AddCollisionEvent(NewToken);
+            this.tiles[Caterpillar.GetHead().X, Caterpillar.GetHead().Y] = null;
         }
         public void Collide(Caterpillar Caterpillar)
         {
