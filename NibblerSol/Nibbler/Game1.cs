@@ -32,6 +32,7 @@ namespace Nibbler
             // TODO: Add your initialization logic here
 
             GameState = new GameState();
+            Grid = new Texture2D[GameState.Grid.tiles.GetLength(0), GameState.Grid.tiles.GetLength(1)];
             base.Initialize();
         }
 
@@ -55,15 +56,15 @@ namespace Nibbler
                     {
                         this.Grid[i, j] = this.Content.Load<Texture2D>("ground");
                     }
-                    if (GameState.Grid.tiles[i, j] is Wall)
+                    else if (GameState.Grid.tiles[i, j] is Wall)
                     {
                         this.Grid[i, j] = this.Content.Load<Texture2D>("wall");
                     }
-                    if (GameState.Grid.tiles[i, j] is CaterpillarGrower)
+                    else if (GameState.Grid.tiles[i, j] is CaterpillarGrower)
                     {
                         this.Grid[i, j] = this.Content.Load<Texture2D>("grower");
                     }
-                    if (GameState.Grid.tiles[i, j] is CaterpillarShrinker)
+                    else if (GameState.Grid.tiles[i, j] is CaterpillarShrinker)
                     {
                         this.Grid[i, j] = this.Content.Load<Texture2D>("shrinker");
                     }
@@ -102,6 +103,9 @@ namespace Nibbler
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
+            graphics.PreferredBackBufferWidth = GameState.Grid.tiles.GetLength(0) * 32;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = GameState.Grid.tiles.GetLength(1) * 32;   // set this value to the desired height of your window
+            graphics.ApplyChanges();
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
