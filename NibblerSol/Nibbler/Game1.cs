@@ -31,8 +31,8 @@ namespace Nibbler
         {
             // TODO: Add your initialization logic here
 
-            base.Initialize();
             GameState = new GameState();
+            base.Initialize();
         }
 
         /// <summary>
@@ -44,7 +44,8 @@ namespace Nibbler
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            
+            // TODO: use this.Content to load your game content here
+
             //loads all but snake
             for (int i=0; i< GameState.Grid.tiles.GetLength(0);i++)
             {
@@ -68,7 +69,6 @@ namespace Nibbler
                     }
                 }
             }
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Nibbler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();

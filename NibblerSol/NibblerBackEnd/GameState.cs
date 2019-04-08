@@ -32,7 +32,7 @@ namespace NibblerBackEnd
         }
         public GameState()
         {
-            this.Grid = Load("");
+            this.Grid = Load("sampleGrid.txt");
             int MiddleX = this.Grid.tiles.GetLength(0) / 2;
             int MiddleY = this.Grid.tiles.GetLength(1) / 2;
             this.Caterpillar = new Caterpillar(new Point(MiddleX, MiddleY), this.Grid);
@@ -48,7 +48,7 @@ namespace NibblerBackEnd
         {
             ICollidable Result;
             Random rand = new Random();
-            if(rand.NextDouble() * (double)100 < 90)
+            if(rand.NextDouble() * ((double)100) < 90)
             {
                 Result = new CaterpillarGrower(3, 0);
             }
@@ -64,6 +64,7 @@ namespace NibblerBackEnd
                 if (!Caterpillar.Contains(new Point(RandomX, RandomY)) && (Grid.tiles[RandomX, RandomY] == null))
                 {
                     Grid.tiles[RandomX, RandomY] = Result;
+                    PositionIsNotNull = false;
                 }
             } while (PositionIsNotNull);
             return Result;
@@ -86,14 +87,14 @@ namespace NibblerBackEnd
             bool HasWalls = true;
             for(int i = 0; i < ProtoGrid.GetLength(0); i++)
             {
-                if(ProtoGrid[i,0].GetType() != typeof(Wall) || ProtoGrid[i,ProtoGrid.GetLength(1)].GetType() != typeof(Wall))
+                if(ProtoGrid[i,0].GetType() != typeof(Wall) || ProtoGrid[i,ProtoGrid.GetLength(1)-1].GetType() != typeof(Wall))
                 {
                     HasWalls = false;
                 }
             }
             for (int i = 0; i < ProtoGrid.GetLength(1); i++)
             {
-                if (ProtoGrid[0, i].GetType() != typeof(Wall) || ProtoGrid[ProtoGrid.GetLength(0), i].GetType() != typeof(Wall))
+                if (ProtoGrid[0, i].GetType() != typeof(Wall) || ProtoGrid[ProtoGrid.GetLength(0)-1, i].GetType() != typeof(Wall))
                 {
                     HasWalls = false;
                 }
@@ -122,7 +123,7 @@ namespace NibblerBackEnd
             {
                 for(int j = 0; j < Ylength; j++)
                 {
-                    if(Contents[i][j+3] == 'W')
+                    if(Contents[i+3][j] == 'W')
                     {
                         ProtoGrid[i, j] = new Wall();
                     }
@@ -162,7 +163,7 @@ namespace NibblerBackEnd
         }
         private void SetPause()
         {
-
+            this.ShouldContinue = false;
         }
         private void AddSelfCollisionSub()
         {
@@ -170,15 +171,27 @@ namespace NibblerBackEnd
         }
         private void Reset()
         {
+            this.Grid = Load("sampleGrid.txt");
+            int MiddleX = this.Grid.tiles.GetLength(0) / 2;
+            int MiddleY = this.Grid.tiles.GetLength(1) / 2;
+            this.Caterpillar = new Caterpillar(new Point(MiddleX, MiddleY), this.Grid);
+            this.Grid.AquireCaterpillar(this.Caterpillar);
+            RandomToken(this.Grid, this.Caterpillar);
+            this.Grid.AquireScoreAndLives(this.ScoreAndLives);
 
+
+            Subscribing(this.Grid, this.ScoreAndLives);
         }
         public void Update()
         {
-            this.Caterpillar.Update();
-            Point Current = this.Caterpillar.GetHead();
-            if(Grid.tiles[Current.X, Current.Y] != null)
+            if (this.ShouldContinue)
             {
-                Grid.Collide(this.Caterpillar);
+                this.Caterpillar.Update();
+                Point Current = this.Caterpillar.GetHead();
+                if (Grid.tiles[Current.X, Current.Y] != null)
+                {
+                    Grid.Collide(this.Caterpillar);
+                }
             }
         }
     }
