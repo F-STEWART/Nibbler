@@ -32,7 +32,7 @@ namespace NibblerBackEnd
         }
         public GameState()
         {
-            this.Grid = Load("");
+            this.Grid = Load("sampleGrid.txt");
             int MiddleX = this.Grid.tiles.GetLength(0) / 2;
             int MiddleY = this.Grid.tiles.GetLength(1) / 2;
             this.Caterpillar = new Caterpillar(new Point(MiddleX, MiddleY), this.Grid);
