@@ -83,15 +83,19 @@ namespace Nibbler
             }
 
             //Add snake to texture grid
+
+            //Iterate through grid
             for (int i = 0; i < GameState.Grid.tiles.GetLength(0); i++)
             {
                 for (int j = 0; j < GameState.Grid.tiles.GetLength(1); j++)
                 {
+                    //If the point is part of the snake
                     if (GameState.Caterpillar.Contains(new NibblerBackEnd.Point(i, j)))
                     {
+                        //Initialize Head
                         if (GameState.Caterpillar.GetHead() == new NibblerBackEnd.Point(i, j))
                         {
-                            switch(GameState.Caterpillar.Direction)
+                            switch (GameState.Caterpillar.Direction)
                             {
                                 case Direction.UP:
                                     this.Grid[i, j] = this.Content.Load<Texture2D>("snake_head_up");
@@ -107,8 +111,19 @@ namespace Nibbler
                                     break;
                             }
                         }
-                       // else if (GameState.Caterpillar.GetTail() == new NibblerBackEnd.Point(i, j))
-                       //     this.Grid[i, j] = this.Content.Load<Texture2D>("snake_tail");
+                        //Initilize tail
+                        else if (GameState.Caterpillar.GetTail() == new NibblerBackEnd.Point(i, j))
+                        {
+                            if(GameState.Caterpillar.GetTailLeader().X > GameState.Caterpillar.GetTail().X)
+                                this.Grid[i, j] = this.Content.Load<Texture2D>("snake_tail_right");
+                            else if(GameState.Caterpillar.GetTailLeader().X < GameState.Caterpillar.GetTail().X)
+                                this.Grid[i, j] = this.Content.Load<Texture2D>("snake_tail_left");
+                            else if (GameState.Caterpillar.GetTailLeader().Y < GameState.Caterpillar.GetTail().Y)
+                                this.Grid[i, j] = this.Content.Load<Texture2D>("snake_tail_up");
+                            else if (GameState.Caterpillar.GetTailLeader().Y > GameState.Caterpillar.GetTail().Y)
+                                this.Grid[i, j] = this.Content.Load<Texture2D>("snake_tail_down");
+                        }
+                        //Initialize body
                         else
                             this.Grid[i, j] = this.Content.Load<Texture2D>("snake_body");
                     }
