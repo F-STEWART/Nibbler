@@ -90,7 +90,23 @@ namespace Nibbler
                     if (GameState.Caterpillar.Contains(new NibblerBackEnd.Point(i, j)))
                     {
                         if (GameState.Caterpillar.GetHead() == new NibblerBackEnd.Point(i, j))
-                            this.Grid[i, j] = this.Content.Load<Texture2D>("snake_head");
+                        {
+                            switch(GameState.Caterpillar.Direction)
+                            {
+                                case Direction.UP:
+                                    this.Grid[i, j] = this.Content.Load<Texture2D>("snake_head_up");
+                                    break;
+                                case Direction.DOWN:
+                                    this.Grid[i, j] = this.Content.Load<Texture2D>("snake_head_down");
+                                    break;
+                                case Direction.LEFT:
+                                    this.Grid[i, j] = this.Content.Load<Texture2D>("snake_head_left");
+                                    break;
+                                case Direction.RIGHT:
+                                    this.Grid[i, j] = this.Content.Load<Texture2D>("snake_head_right");
+                                    break;
+                            }
+                        }
                        // else if (GameState.Caterpillar.GetTail() == new NibblerBackEnd.Point(i, j))
                        //     this.Grid[i, j] = this.Content.Load<Texture2D>("snake_tail");
                         else
