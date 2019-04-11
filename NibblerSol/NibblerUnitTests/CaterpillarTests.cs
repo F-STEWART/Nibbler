@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace NibblerUnitTests
 {
-    class CaterpillarTests
+    [TestClass]
+    public class CaterpillarTests
     {
+        [TestMethod]
+        public void TestMethod1()
+        {
+        }
     }
 }
