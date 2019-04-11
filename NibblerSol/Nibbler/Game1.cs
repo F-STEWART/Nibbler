@@ -16,6 +16,7 @@ namespace Nibbler
         GameState GameState;
         GridSprite GridImages;
         CaterpillarSprite CaterpillarImages;
+        ScoreAndLivesSprite ScoreAndLivesSprite;
         int UpdaterCount = 0;
         bool AlreadyChangedDirection = false;
 
@@ -30,15 +31,17 @@ namespace Nibbler
         protected override void Initialize()
         {
             GameState = new GameState();
-            GraphicsDevice.Clear(Color.White);
             graphics.PreferredBackBufferWidth = GameState.Grid.tiles.GetLength(0) * 32;  // set this value to the desired width of the window
-            graphics.PreferredBackBufferHeight = GameState.Grid.tiles.GetLength(1) * 32;   // set this value to the desired height of the window
+            graphics.PreferredBackBufferHeight = GameState.Grid.tiles.GetLength(1) * 32 + 100;   // set this value to the desired height of the window
             graphics.ApplyChanges();
+            GraphicsDevice.Clear(Color.White);
             Grid = new Texture2D[GameState.Grid.tiles.GetLength(0), GameState.Grid.tiles.GetLength(1)];
             GridImages = new GridSprite(this, GameState.Grid);
             CaterpillarImages = new CaterpillarSprite(this, GameState);
+            ScoreAndLivesSprite = new ScoreAndLivesSprite(this, GameState.ScoreAndLives);
             Components.Add(GridImages);
             Components.Add(CaterpillarImages);
+            Components.Add(ScoreAndLivesSprite);
             base.Initialize();
         }
         
