@@ -63,29 +63,44 @@ namespace NibblerUnitTests
         public void ConstructorTest()
         {
             GameState gameState = new GameState();
-            if (gameState != null)
+            if (gameState is GameState)
                 Assert.IsTrue(true);
             else
                 Assert.Fail();
 
-            if (gameState.Caterpillar != null)
+            if (gameState.Caterpillar is Caterpillar)
                 Assert.IsTrue(true);
             else
                 Assert.Fail();
 
-            if (gameState.Grid != null)
+            if (gameState.Grid is Grid)
                 Assert.IsTrue(true);
             else
                 Assert.Fail();
+            if (gameState.ScoreAndLives is ScoreAndLives)
+                Assert.IsTrue(true);
+            else
+                Assert.Fail();
+
+            bool IsThereAToken = false;
+            for (int i = 0; i < gameState.Grid.tiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < gameState.Grid.tiles.GetLength(1); j++)
+                {
+                    if (gameState.Grid.tiles[i, j] is CaterpillarGrower || gameState.Grid.tiles[i, j] is CaterpillarShrinker)
+                        IsThereAToken = true;
+                }
+            }
+            Assert.IsTrue(IsThereAToken);
+            int MiddleX = gameState.Grid.tiles.GetLength(0) / 2;
+            int MiddleY = gameState.Grid.tiles.GetLength(1) / 2;
+            Assert.IsTrue(new Point(MiddleX, MiddleY) == gameState.Caterpillar.GetHead());
         }
         [TestMethod]
-        public void OtherTest()
+        public void RandomTokenUnitTest()
         {
             GameState gameState = new GameState();
-            if (gameState != null)
-                Assert.IsTrue(true);
-            else
-                Assert.Fail();
+            Assert.IsTrue(GameState.RandomToken(gameState.Grid, gameState.Caterpillar) is ICollidable);
         }
     }
 }
