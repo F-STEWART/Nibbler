@@ -111,6 +111,28 @@ namespace NibblerBackEnd
             return Squares.First();
         }
 
+        public Point GetTailLeader()
+        {
+            foreach (Point point in Squares)
+            {
+                if (point != GetTail())
+                    return point;
+            }
+            return new Point(0,0);
+        }
+        public Point GetLeader(Point subject)
+        {
+            Boolean next = false;
+            foreach (Point point in Squares)
+            {
+                if (next)
+                    return point;
+                else if (subject == point)
+                    next = true;
+            }
+            return new Point(0, 0);
+        }
+
         public void Move()
         {
             Point newest = GetHead();
