@@ -68,6 +68,7 @@ namespace NibblerBackEnd
         //Collision event call.
         public void Collide(Caterpillar Caterpillar)
         {
+            //needed to find which tile is being affected
             Point Current = Caterpillar.GetHead();
             this.tiles[Current.X, Current.Y].Collide(Caterpillar);
         }
