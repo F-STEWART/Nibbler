@@ -19,6 +19,8 @@ namespace NibblerBackEnd
         {
             OnWhenSelfCollision();
         }
+
+        // Raise SlefCollision Event
         public void OnWhenSelfCollision()
         {
             if(SelfCollision != null)
@@ -27,19 +29,25 @@ namespace NibblerBackEnd
             }
         }
 
+        // Resets position of caterpillar
         public void Die()
         {
+            //Place first point in middle of board
             int MiddleX = this.Grid.tiles.GetLength(0) / 2;
             int MiddleY = this.Grid.tiles.GetLength(1) / 2;
             Point start = new Point(MiddleX, MiddleY);
+            // Place tail directly to the right of that
             Point tail = new Point(start.X - 1, start.Y);
+            // Create queue and enqueue both points
             this.Squares = new Queue<Point>();
             Squares.Enqueue(tail);
             Squares.Enqueue(start);
             this.Grower = 0;
+
             this.Direction = Direction.RIGHT;
         }
 
+        // Instantiates Caterpillar
         public Caterpillar(Point start, Grid Grid)
         {
             Point tail = new Point(start.X-1, start.Y);
