@@ -12,6 +12,8 @@ namespace NibblerUnitTests
         {
             Caterpillar testyboi = new Caterpillar(new Point(5,5));
 
+            Assert.IsNotNull(testyboi);
+
             Point head = new Point(5, 5);
             Point tail = new Point(4, 5);
 
@@ -49,6 +51,30 @@ namespace NibblerUnitTests
             testyboi.ChangeDirection(Direction.UP);
 
             Assert.AreEqual(Direction.UP, testyboi.Direction);
+        }
+
+        [TestMethod]
+        public void GetTailLeaderTest()
+        {
+            Caterpillar testyboi = new Caterpillar(new Point(5, 5));
+
+            Point head = new Point(5, 5);
+            Point tail = new Point(4, 5);
+
+            Assert.AreEqual(Direction.RIGHT, testyboi.Direction);
+            Assert.AreEqual(head.X, testyboi.GetTailLeader().X);
+            Assert.AreEqual(head.Y, testyboi.GetTailLeader().Y);
+            Assert.AreEqual(tail.X, testyboi.GetTail().X);
+            Assert.AreEqual(tail.Y, testyboi.GetTail().Y);
+        }
+
+        [TestMethod]
+        public void ContainsTest()
+        {
+            Caterpillar testyboi = new Caterpillar(new Point(5, 5));
+
+            Assert.IsTrue(testyboi.Contains(new Point(4, 5)));
+            Assert.IsFalse(testyboi.Contains(new Point(6, 5)));
         }
     }
 }

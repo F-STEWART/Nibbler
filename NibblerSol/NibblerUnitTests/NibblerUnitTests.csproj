@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CaterpillarTests.cs" />
     <Compile Include="GameStateUnitTest.cs" />
+    <Compile Include="GridTests.cs" />
     <Compile Include="GridUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScoreAndLivesUnitTest.cs" />

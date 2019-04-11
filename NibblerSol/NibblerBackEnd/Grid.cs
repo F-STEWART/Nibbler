@@ -28,11 +28,6 @@ namespace NibblerBackEnd
             this.tiles = tiles;
             this.TokenGenerator = TokenGenerator;
             this.Caterpillar = null;
-
-
-
-
-            
         }
         //Gets score and lives for Subscription purposes
         public void AquireScoreAndLives(ScoreAndLives ScoreAndLives)
