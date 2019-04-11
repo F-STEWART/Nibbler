@@ -200,10 +200,14 @@ namespace NibblerBackEnd
         private void DeathSubscription()
         {
             ScoreAndLives.NoMoreLives += SetPause;
+            Caterpillar.SelfCollision += SetPause;
         }
         private void SetPause()
         {
-            this.ShouldContinue = false;
+            if (ScoreAndLives.Lives <= 0)
+            {
+                this.ShouldContinue = false;
+            }
         }
         //This will do the subscription which causes the catterpillar to reset.
         private void AddSelfCollisionSub()
