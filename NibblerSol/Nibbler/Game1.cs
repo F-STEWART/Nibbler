@@ -17,6 +17,7 @@ namespace Nibbler
         GridSprite GridImages;
         CaterpillarSprite CaterpillarImages;
         int UpdaterCount = 0;
+        bool AlreadyChangedDirection = false;
 
         public Game1()
         {
@@ -57,15 +58,22 @@ namespace Nibbler
                 Exit();
 
             KeyboardState state = Keyboard.GetState();
-            
-            if (state.IsKeyDown(Keys.Right))
+
+            Direction Current = GameState.Caterpillar.Direction;
+
+            // TODO: Add your update logic here
+            if (state.IsKeyDown(Keys.Right) && !AlreadyChangedDirection)
                 GameState.Caterpillar.ChangeDirection(Direction.RIGHT);
-            if (state.IsKeyDown(Keys.Left))
+            if (state.IsKeyDown(Keys.Left) && !AlreadyChangedDirection)
                 GameState.Caterpillar.ChangeDirection(Direction.LEFT);
-            if (state.IsKeyDown(Keys.Up))
+            if (state.IsKeyDown(Keys.Up) && !AlreadyChangedDirection)
                 GameState.Caterpillar.ChangeDirection(Direction.UP);
-            if (state.IsKeyDown(Keys.Down))
+            if (state.IsKeyDown(Keys.Down) && !AlreadyChangedDirection)
                 GameState.Caterpillar.ChangeDirection(Direction.DOWN);
+
+            if (Current != GameState.Caterpillar.Direction)
+                AlreadyChangedDirection = true;
+
             if (UpdaterCount < 60)
             {
                 UpdaterCount++;
@@ -74,6 +82,7 @@ namespace Nibbler
             {
                 GameState.Update();
                 UpdaterCount = 0;
+                AlreadyChangedDirection = false;
             }
             base.Update(gameTime);
         }
