@@ -43,14 +43,6 @@ namespace NibblerBackEnd
         }
         public void AddPointsAndLives(ICollidable Sender, EventArgs e)
         {
-            /*if (Sender is CaterpillarGrower || Sender is CaterpillarShrinker)
-            {
-                this.Score += Sender.Points;
-            }
-            else if (Sender is Wall)
-            {
-                this.Lives--;
-            }*/
             //This will add points if the caterpillar collides with a token
             this.Score += Sender.Points;
             //This will cause the caterpillar to lose a life if it collides with a wall.
