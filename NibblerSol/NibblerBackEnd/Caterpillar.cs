@@ -20,7 +20,7 @@ namespace NibblerBackEnd
             OnWhenSelfCollision();
         }
 
-        // Raise SlefCollision Event
+        // Raise SelfCollision Event
         public void OnWhenSelfCollision()
         {
             if(SelfCollision != null)
@@ -43,7 +43,7 @@ namespace NibblerBackEnd
             Squares.Enqueue(tail);
             Squares.Enqueue(start);
             this.Grower = 0;
-
+            //Instantiate direction to be right
             this.Direction = Direction.RIGHT;
         }
 
@@ -59,6 +59,7 @@ namespace NibblerBackEnd
             this.Grower = 0;
         }
 
+        // Does not allow the direction to be changed to the one directly oposite to where you are pointing
         public void ChangeDirection(Direction d)
         {
             switch (Direction)
@@ -90,6 +91,7 @@ namespace NibblerBackEnd
             }
         }
 
+        // Moves Caterpillar and checks for Self Collision
         public void Update()
         {
             Move();
@@ -104,21 +106,25 @@ namespace NibblerBackEnd
             }
         }
 
+        // Returns length of caterpillar
         public int GetLength()
         {
             return Squares.Count;
         }
 
+        // Returns Head of caterpillar
         public Point GetHead()
         {
             return Squares.Last();
         }
 
+        // Returns Tail of caterpillar
         public Point GetTail()
         {
             return Squares.First();
         }
 
+        // Get point right after tail
         public Point GetTailLeader()
         {
             foreach (Point point in Squares)
@@ -128,6 +134,8 @@ namespace NibblerBackEnd
             }
             return new Point(0,0);
         }
+
+        // Finds point after a given point
         public Point GetLeader(Point subject)
         {
             Boolean next = false;
@@ -141,6 +149,7 @@ namespace NibblerBackEnd
             return new Point(0, 0);
         }
 
+        // Moves the queue forward by one (Grows from the back if necesary)
         public void Move()
         {
             Point newest = GetHead();
@@ -169,21 +178,25 @@ namespace NibblerBackEnd
             }
         }
 
+        // Removes last element of queue
         public void Shrink()
         {
             Squares.Dequeue();
         }
 
+        // Adds a point to the queue
         private void grow(Point next)
         {
             Squares.Enqueue(next);
         }
 
+        // Adds a number to the grower
         public void Grow(int change)
         {
             this.Grower += change;
         }
 
+        // checks to see if a point is contained in the queue
         public Boolean Contains(Point contents)
         {
             foreach (Point square in Squares)
