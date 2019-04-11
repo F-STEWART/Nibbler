@@ -1,0 +1,23 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"H:/C#/teamb/NibblerSol/Nibbler/Content/body_turn_down_left.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/body_turn_down_left.xnb","TextureProcessor","Texture2DContent",2437,4181,0.2528556
+"H:/C#/teamb/NibblerSol/Nibbler/Content/body_turn_down_right.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/body_turn_down_right.xnb","TextureProcessor","Texture2DContent",2464,4181,0.0139921
+"H:/C#/teamb/NibblerSol/Nibbler/Content/body_turn_up_left.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/body_turn_up_left.xnb","TextureProcessor","Texture2DContent",2421,4181,0.0379784
+"H:/C#/teamb/NibblerSol/Nibbler/Content/body_turn_up_right.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/body_turn_up_right.xnb","TextureProcessor","Texture2DContent",2395,4181,0.0129935
+"H:/C#/teamb/NibblerSol/Nibbler/Content/ground.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/ground.xnb","TextureProcessor","Texture2DContent",731,4181,0.0159909
+"H:/C#/teamb/NibblerSol/Nibbler/Content/grower.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/grower.xnb","TextureProcessor","Texture2DContent",2567,4181,0.0159927
+"H:/C#/teamb/NibblerSol/Nibbler/Content/Score.spritefont","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/Score.xnb","FontDescriptionProcessor","SpriteFontContent",2008,70673,0.4427501
+"H:/C#/teamb/NibblerSol/Nibbler/Content/shrinker.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/shrinker.xnb","TextureProcessor","Texture2DContent",2574,4181,0.0199869
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_body.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_body.xnb","TextureProcessor","Texture2DContent",2313,4181,0.0129926
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_head.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_head.xnb","TextureProcessor","Texture2DContent",2679,4181,0.0159905
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_head_down.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_head_down.xnb","TextureProcessor","Texture2DContent",2864,4181,0.2251242
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_head_left.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_head_left.xnb","TextureProcessor","Texture2DContent",2854,4181,0.0114248
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_head_right.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_head_right.xnb","TextureProcessor","Texture2DContent",2887,4181,0.0146189
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_head_up.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_head_up.xnb","TextureProcessor","Texture2DContent",2868,4181,0.0130221
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_tail.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_tail.xnb","TextureProcessor","Texture2DContent",2324,4181,0.0099961
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_tail_down.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_tail_down.xnb","TextureProcessor","Texture2DContent",2519,4181,0.0119449
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_tail_left.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_tail_left.xnb","TextureProcessor","Texture2DContent",2513,4181,0.0116848
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_tail_right.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_tail_right.xnb","TextureProcessor","Texture2DContent",2460,4181,0.0119961
+"H:/C#/teamb/NibblerSol/Nibbler/Content/snake_tail_up.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/snake_tail_up.xnb","TextureProcessor","Texture2DContent",2490,4181,0.0131564
+"H:/C#/teamb/NibblerSol/Nibbler/Content/token.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/token.xnb","TextureProcessor","Texture2DContent",2302,4181,0.0149923
+"H:/C#/teamb/NibblerSol/Nibbler/Content/wall.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/wall.xnb","TextureProcessor","Texture2DContent",811,4181,0.0109746
+"H:/C#/teamb/NibblerSol/Nibbler/Content/white_rectangle.png","H:/C#/teamb/NibblerSol/Nibbler/Content/bin/Windows/Content/white_rectangle.xnb","TextureProcessor","Texture2DContent",925,480085,0.2318573
