@@ -10,7 +10,7 @@ namespace Nibbler
 {
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D[,] Grid;
         GameState GameState;

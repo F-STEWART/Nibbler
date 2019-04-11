@@ -47,7 +47,9 @@ namespace Nibbler
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, "Score: " + ScoreAndLives.Score, new Vector2(5, 645), Color.Black);
+            spriteBatch.Draw(game.Content.Load<Texture2D>("white_rectangle"), new Vector2(0, game.graphics.PreferredBackBufferHeight - 100));
+            spriteBatch.DrawString(font, "Score: " + ScoreAndLives.Score, new Vector2(5, game.graphics.PreferredBackBufferHeight - 100), Color.Black);
+            spriteBatch.DrawString(font, "Lives: " + ScoreAndLives.Lives, new Vector2(180, game.graphics.PreferredBackBufferHeight - 100), Color.Black);
             spriteBatch.End();
             base.Draw(gameTime);
         }
