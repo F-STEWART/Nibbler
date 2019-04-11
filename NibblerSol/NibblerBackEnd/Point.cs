@@ -33,5 +33,12 @@ namespace NibblerBackEnd
             else
                 return true;
         }
+        public Boolean Equals(Point other)
+        {
+            if (this.X == other.X && this.Y == other.Y)
+                return true;
+            else
+                return false;
+        }
     }
 }

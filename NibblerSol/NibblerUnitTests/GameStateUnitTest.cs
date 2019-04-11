@@ -67,6 +67,25 @@ namespace NibblerUnitTests
                 Assert.IsTrue(true);
             else
                 Assert.Fail();
+
+            if (gameState.Caterpillar != null)
+                Assert.IsTrue(true);
+            else
+                Assert.Fail();
+
+            if (gameState.Grid != null)
+                Assert.IsTrue(true);
+            else
+                Assert.Fail();
+        }
+        [TestMethod]
+        public void OtherTest()
+        {
+            GameState gameState = new GameState();
+            if (gameState != null)
+                Assert.IsTrue(true);
+            else
+                Assert.Fail();
         }
     }
 }
