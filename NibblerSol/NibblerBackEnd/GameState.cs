@@ -26,30 +26,42 @@ namespace NibblerBackEnd
             get;
             private set;
         }
+        //If this is false the game ends, as a key statment in update turns false
         public bool ShouldContinue
         {
             get;
             private set;
         }
+        //GameState constructor, this is what controls everything in the back end
         public GameState()
         {
+            //This calls load and the string is the name of the file in the repo that contains the construction of the grid
             this.Grid = Load("sampleGrid.txt");
+            //Making the points for the caterpillar start location
             int MiddleX = this.Grid.tiles.GetLength(0) / 2;
             int MiddleY = this.Grid.tiles.GetLength(1) / 2;
+            //makes the caterpillar in the middle of the grid
             this.Caterpillar = new Caterpillar(new Point(MiddleX, MiddleY), this.Grid);
+            //the grid needs a reference to the caterpillar for subscription purposes, so that is done here. 
             this.Grid.AquireCaterpillar(this.Caterpillar);
+            //Calls to make the first token
             RandomToken(this.Grid, this.Caterpillar);
+            //constructs score and lives
             this.ScoreAndLives = new ScoreAndLives();
+            //Again this is for subscription purposes
             this.Grid.AquireScoreAndLives(this.ScoreAndLives);
+            //when this is false the game ends
             this.ShouldContinue = true;
 
-
+            //Initial subscriptions
             Subscribing(this.Grid, this.ScoreAndLives);
         }
+        //The reason this method is here is because it is called in Game state once, after that it is called as a delegate in grid.
         public static ICollidable RandomToken(Grid Grid, Caterpillar Caterpillar)
         {
             ICollidable Result;
             Random rand = new Random();
+            //there is an 80% chance that a token is a grower, and a 20% chance it is a shinker
             if(rand.NextDouble() * ((double)100) < 80)
             {
                 Result = new CaterpillarGrower(3, 0);
@@ -58,6 +70,8 @@ namespace NibblerBackEnd
             {
                 Result = new CaterpillarShrinker(1, 0);
             }
+            //This is for determining a random empty position, if after the do while loop iterates it is not false
+            //That means that the position was null and a token is placed, otherwise it will look again.
             bool PositionIsNotNull = true;
             do
             {
@@ -69,14 +83,18 @@ namespace NibblerBackEnd
                     PositionIsNotNull = false;
                 }
             } while (PositionIsNotNull);
+            //in some instances it is necessary to have subscriptions with the token hence a return, otherwise the method is self sufficient.
             return Result;
         }
+        //This tests to see if the file source is rectangular before turning it into the tile array
         private static bool IsRectangular(List<String> ImputStrings)
         {
             bool IsRectangular = true;
+            //the [3] is because the grid itself starts at the 4th line
             int Xlength = ImputStrings[3].Length;
             for(int i = 3; i < ImputStrings.Count; i++)
             {
+                //if this returns true the method will return false which will intentionally crash the program
                 if(ImputStrings[i].Length != Xlength)
                 {
                     IsRectangular = false;
@@ -84,6 +102,7 @@ namespace NibblerBackEnd
             }
             return IsRectangular;
         }
+        //This checks the tile array to see if there are walls on all edges
         private static bool HasWalls(ICollidable[,] ProtoGrid)
         {
             bool HasWalls = true;
