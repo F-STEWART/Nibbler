@@ -59,6 +59,17 @@ namespace NibblerBackEnd
             this.Grower = 0;
         }
 
+        // For testing purposes
+        public Caterpillar(Point start)
+        {
+            Point tail = new Point(start.X - 1, start.Y);
+            this.Squares = new Queue<Point>();
+            Squares.Enqueue(tail);
+            Squares.Enqueue(start);
+            this.Direction = Direction.RIGHT;
+            this.Grower = 0;
+        }
+
         // Does not allow the direction to be changed to the one directly oposite to where you are pointing
         public void ChangeDirection(Direction d)
         {
