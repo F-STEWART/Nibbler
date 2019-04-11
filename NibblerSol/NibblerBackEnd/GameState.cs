@@ -105,9 +105,11 @@ namespace NibblerBackEnd
         //This checks the tile array to see if there are walls on all edges
         private static bool HasWalls(ICollidable[,] ProtoGrid)
         {
+            //If this is set to false, the method will return false and the program will intentionally crash.
             bool HasWalls = true;
             for(int i = 0; i < ProtoGrid.GetLength(0); i++)
             {
+                //This complicated if statement checks if the top and bottom walls, are walls, if not it will turn Has Walls false
                 if((ProtoGrid[i, 0] == null || ProtoGrid[i,0].GetType() != typeof(Wall)) || (ProtoGrid[i, ProtoGrid.GetLength(1) - 1] == null || ProtoGrid[i,ProtoGrid.GetLength(1)-1].GetType() != typeof(Wall)))
                 {
                     HasWalls = false;
@@ -115,35 +117,45 @@ namespace NibblerBackEnd
             }
             for (int i = 0; i < ProtoGrid.GetLength(1); i++)
             {
+                //This complicated if statement checks the left and right walls are walls, if not it will turn Has Walls false
                 if ((ProtoGrid[0, i] == null || ProtoGrid[0, i].GetType() != typeof(Wall)) || (ProtoGrid[ProtoGrid.GetLength(0) - 1, i] == null || ProtoGrid[ProtoGrid.GetLength(0)-1, i].GetType() != typeof(Wall)))
                 {
                     HasWalls = false;
                 }
             }
+            //If this is true the programs runs normally, but false will crash the program as the level is not properly set up.
             return HasWalls;
         }
+        //This essentially loads the grid to it's initial state from a text file.
         private static Grid Load(String FileName)
         {
+            //This is the contents of the file as a list of strings
             List<String> Contents = new List<String>();
             using (StreamReader sr = File.OpenText(FileName)) 
             {
                 String s = "";
+                //this is just the initialization from the file.
                 while((s = (sr.ReadLine())) != null)
                 {
                     Contents.Add(s);
                 }
             }
+            //This tests if the file is rectangular and throws an exception if not.
             if (!IsRectangular(Contents))
             {
                 throw new ArgumentException("The contents of the file are not Rectangular");
             }
+            //Here we calculate the length and width of the grid the reason for the [3] is that the actual grid starts at the fourth line in the file
             int Xlength = Contents[3].Length;
             int Ylength = Contents.Count - 3;
             ICollidable[,] ProtoGrid = new ICollidable[Xlength, Ylength];
+            //This initialises the walls from the file into the tile array
             for (int i = 0; i < Xlength; i++)
             {
                 for(int j = 0; j < Ylength; j++)
                 {
+                    //This may seem like an error being [j+3][i] instead of [i+3][j], but this is correct contents is an array of strings which are arrays of
+                    //chars, and the important thing is that the effective x, y coordinates are effectively reversed here
                     if(Contents[j+3][i] == 'W')
                     {
                         ProtoGrid[i, j] = new Wall();
@@ -154,6 +166,7 @@ namespace NibblerBackEnd
                     }
                 }
             }
+            //This checks if there are walls surrounding the edges, if not it throws an exception.
             if (!HasWalls(ProtoGrid))
             {
                 throw new ArgumentException("The contents of the file do not have as surrounding wall");
@@ -162,23 +175,28 @@ namespace NibblerBackEnd
             
             return grid;
         }
+        //This does all the initial subscriptions
         private void Subscribing(Grid Grid, ScoreAndLives ScoreAndLives)
         {
             for(int i = 0; i < Grid.tiles.GetLength(0); i++)
             {
                 for(int j = 0; j < Grid.tiles.GetLength(1); j++)
                 {
-                    
+                    //If there is something to subscribe here, it will be subscribed
+                    //both in grid and score and lives
                     Grid.AddCollisionEvent(Grid.tiles[i, j]);
                     ScoreAndLives.AddCollisionEvent(Grid.tiles[i, j]);
 
 
                 }
             }
+            //Caterpillars self collision subs
             AddSelfCollisionSub();
             ScoreAndLives.SelfCollisionSub(Caterpillar);
+            //This subscribes the game lose scenario.
             DeathSubscription();
         }
+        //These methods subscribe and get executed when all lives are lost, this pauses the game.
         private void DeathSubscription()
         {
             ScoreAndLives.NoMoreLives += SetPause;
@@ -187,10 +205,12 @@ namespace NibblerBackEnd
         {
             this.ShouldContinue = false;
         }
+        //This will do the subscription which causes the catterpillar to reset.
         private void AddSelfCollisionSub()
         {
             this.Caterpillar.SelfCollision += this.Caterpillar.Die;
         }
+        //This resets the board on death
         private void Reset()
         {
             this.Grid = Load("sampleGrid.txt");
@@ -204,6 +224,8 @@ namespace NibblerBackEnd
 
             Subscribing(this.Grid, this.ScoreAndLives);
         }
+        // The update method is called constantly, and checks for collisions.
+        //If the user has lost all their lives, Should continue will be false and no code will be called.
         public void Update()
         {
             
