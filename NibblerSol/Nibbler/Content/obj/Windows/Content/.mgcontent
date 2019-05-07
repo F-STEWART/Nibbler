@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/body_turn_down_left.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/body_turn_down_right.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/body_turn_up_left.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/body_turn_up_right.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/ground.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/grower.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/Score.spritefont</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/shrinker.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_body.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_head.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_head_down.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_head_left.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_head_right.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_head_up.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_tail.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_tail_down.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_tail_left.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_tail_right.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/snake_tail_up.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/token.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/wall.png</File>
+    <File>H:/C#/teamb/NibblerSol/Nibbler/Content/white_rectangle.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

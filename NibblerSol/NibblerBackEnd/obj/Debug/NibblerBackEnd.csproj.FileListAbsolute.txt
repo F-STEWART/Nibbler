@@ -1,0 +1,7 @@
+H:\C#\teamb\NibblerSol\NibblerBackEnd\obj\Debug\NibblerBackEnd.csprojAssemblyReference.cache
+H:\C#\teamb\NibblerSol\NibblerBackEnd\obj\Debug\NibblerBackEnd.csproj.CoreCompileInputs.cache
+H:\C#\teamb\NibblerSol\NibblerBackEnd\bin\Debug\NibblerBackEnd.dll.config
+H:\C#\teamb\NibblerSol\NibblerBackEnd\bin\Debug\NibblerBackEnd.dll
+H:\C#\teamb\NibblerSol\NibblerBackEnd\bin\Debug\NibblerBackEnd.pdb
+H:\C#\teamb\NibblerSol\NibblerBackEnd\obj\Debug\NibblerBackEnd.dll
+H:\C#\teamb\NibblerSol\NibblerBackEnd\obj\Debug\NibblerBackEnd.pdb
